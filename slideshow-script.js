@@ -57,13 +57,3 @@ function showSlides(n, containerId) {
     captionText.innerHTML = dots[idx - 1].alt;
   }
 }
-
-// Asegúrate de que esto se ejecute al cargar la página:
-document.addEventListener("DOMContentLoaded", function() {
-    // Inicializa todos los carruseles que existan en la página
-    ['slideshow-3', 'slideshow-4', 'slideshow-5', 'slideshow-6', 'slideshow-7', 'slideshow-8'].forEach(function(id) {
-        if (document.getElementById(id)) {
-            showSlides(1, id);
-        }
-    });
-});

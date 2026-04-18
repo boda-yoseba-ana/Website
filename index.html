@@ -1,502 +1,1059 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adrián Carmona Córdoba | Portfolio</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="slideshow.css">
-    <link rel="icon" type="image/png" href="images/yo.jpg">
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Adrián Carmona Córdoba | 3D Artist · VFX · Game Dev</title>
+  <meta name="description" content="Portfolio of Adrián Carmona Córdoba — 3D Artist, VFX Artist and Game Developer.">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="favicon-180.png">
 </head>
-
 <body>
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark">
-        <div class="container">
-            <a class="navbar-brand fs-6" href="#">Adrián Carmona Córdoba |<br class="nav-splitter"> Portfolio</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item fs-6"><a class="nav-link" href="#sobre-mi">Who I am?</a></li>
-                    <li class="nav-item fs-6"><a class="nav-link" href="#demos">Demos</a></li>
-                    <li class="nav-item fs-6"><a class="nav-link" href="#proyectos">Projects</a></li>
-                    <li class="nav-item fs-6"><a class="nav-link" href="#cv">My CV</a></li>
-                    <li class="nav-item fs-6"><a class="nav-link" href="#contact">Contact</a></li>
-                </ul>
+
+<!-- ── SECTION COLOUR INDICATOR ──────────────────────────────── -->
+<div id="secIndicator"></div>
+
+<!-- ── CUSTOM CURSOR ─────────────────────────────────────────── -->
+<div class="cursor-dot"  id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- ── LIGHTBOX ─────────────────────────────────────────────── -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+  <img id="lbImg" src="" alt="">
+  <button class="lb-close" onclick="closeLightbox()">✕</button>
+</div>
+
+<!-- ── VIDEO LIGHTBOX ───────────────────────────────────────── -->
+<div class="video-lightbox" id="videoLightbox" onclick="closeVideoLightbox(event)">
+  <video id="lbVideo" controls playsinline>
+    <source id="lbVideoSrc" src="" type="video/mp4">
+  </video>
+  <button class="lb-close" onclick="closeVideoLightbox()">✕</button>
+</div>
+
+<!-- ================================================================
+     NAVBAR
+================================================================ -->
+<nav class="navbar" id="navbar">
+  <a href="#hero" class="nav-logo">AC<span class="dot">.</span></a>
+
+  <ul class="nav-links">
+    <li><a href="#about"    data-en="Who I Am"    data-es="Quién soy">Who I Am</a></li>
+    <li><a href="#skills"   data-en="Skills"      data-es="Skills">Skills</a></li>
+    <li><a href="#demos"    data-en="Demos"       data-es="Demos">Demos</a></li>
+    <li><a href="#work3d"   data-en="3D Work"     data-es="Trabajo 3D">3D Work</a></li>
+    <li><a href="#gamedev"  data-en="Game Dev"    data-es="Game Dev">Game Dev</a></li>
+    <li><a href="#vfx"      data-en="VFX"         data-es="VFX">VFX</a></li>
+    <li><a href="#timeline" data-en="Journey"     data-es="Trayectoria">Journey</a></li>
+    <li><a href="#contact"  data-en="Contact"     data-es="Contacto">Contact</a></li>
+  </ul>
+
+  <div style="display:flex;align-items:center;gap:1rem;">
+    <div class="lang-toggle">
+      <button class="lang-btn active" id="btnEN" onclick="setLang('en')">EN</button>
+      <button class="lang-btn"        id="btnES" onclick="setLang('es')">ES</button>
+    </div>
+    <div class="nav-hamburger" id="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile menu -->
+<div class="nav-mobile-menu" id="mobileMenu">
+  <a href="#about"    onclick="toggleMenu()" data-en="Who I Am"  data-es="Quién soy">Who I Am</a>
+  <a href="#skills"   onclick="toggleMenu()" data-en="Skills"    data-es="Skills">Skills</a>
+  <a href="#demos"    onclick="toggleMenu()" data-en="Demos"     data-es="Demos">Demos</a>
+  <a href="#work3d"   onclick="toggleMenu()" data-en="3D Work"   data-es="Trabajo 3D">3D Work</a>
+  <a href="#gamedev"  onclick="toggleMenu()" data-en="Game Dev"  data-es="Game Dev">Game Dev</a>
+  <a href="#vfx"      onclick="toggleMenu()" data-en="VFX"       data-es="VFX">VFX</a>
+  <a href="#timeline" onclick="toggleMenu()" data-en="Journey"   data-es="Trayectoria">Journey</a>
+  <a href="#contact"  onclick="toggleMenu()" data-en="Contact"   data-es="Contacto">Contact</a>
+</div>
+
+<!-- ================================================================
+     HERO
+================================================================ -->
+<section id="hero">
+  <!-- Floating parallax shapes -->
+  <div class="hero-shape hero-shape--orb-1"  data-parallax="22"></div>
+  <div class="hero-shape hero-shape--orb-2"  data-parallax="-16"></div>
+  <div class="hero-shape hero-shape--ring-1" data-parallax="10"></div>
+  <div class="hero-shape hero-shape--ring-2" data-parallax="-8"></div>
+  <div class="hero-shape hero-shape--rect-1"></div>
+  <div class="hero-shape hero-shape--dot-1"  data-parallax="30"></div>
+  <div class="hero-shape hero-shape--dot-2"  data-parallax="-25"></div>
+
+  <!-- Corner brackets -->
+  <div class="hb hb--tl"></div>
+  <div class="hb hb--tr"></div>
+  <div class="hb hb--bl"></div>
+  <div class="hb hb--br"></div>
+
+  <!-- Kubrick corridor floor -->
+  <div class="hero-floor">
+    <div class="floor-grid"></div>
+  </div>
+
+  <div class="hero-content">
+    <p class="hero-eyebrow" data-en="3D Artist · VFX Artist · Game Developer" data-es="Artista 3D · Artista VFX · Desarrollador de Videojuegos">
+      3D Artist · VFX Artist · Game Developer
+    </p>
+
+    <h1 class="hero-name">
+      ADRIÁN<br><span class="accent">CARMONA</span>
+    </h1>
+
+    <div class="hero-rule"></div>
+
+    <p class="hero-roles">
+      <span data-en="I create " data-es="Creo ">I create </span><span class="role-text" id="roleText"></span>
+    </p>
+
+    <div class="hero-cta">
+      <a href="#work3d"  class="btn btn-primary" data-en="See 3D Work"  data-es="Ver trabajo 3D">See 3D Work</a>
+      <a href="#contact" class="btn btn-ghost"   data-en="Get in touch" data-es="Contactar">Get in touch</a>
+    </div>
+  </div>
+
+  <div class="hero-scroll">
+    <span data-en="scroll" data-es="bajar">scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ════ TICKER 01 ════════════════════════════════════════════ -->
+<div class="ticker ticker--orange">
+  <div class="ticker-track">
+    <span class="ticker-item">ULTRA 3D</span><span class="ticker-item ticker-sep">·</span>
+    <span class="ticker-item">ULTRA VFX</span><span class="ticker-item ticker-sep">·</span>
+    <span class="ticker-item">ULTRA GAMES</span><span class="ticker-item ticker-sep">·</span>
+    <span class="ticker-item">ADRIÁN CARMONA CÓRDOBA</span><span class="ticker-item ticker-sep">·</span>
+    <span class="ticker-item">MAYA</span><span class="ticker-item ticker-sep">·</span>
+    <span class="ticker-item">ZBRUSH</span><span class="ticker-item ticker-sep">·</span>
+    <span class="ticker-item">UNITY</span><span class="ticker-item ticker-sep">·</span>
+    <span class="ticker-item">NUKE</span><span class="ticker-item ticker-sep">·</span>
+    <!-- duplicate for seamless loop -->
+    <span class="ticker-item">ULTRA 3D</span><span class="ticker-item ticker-sep">·</span>
+    <span class="ticker-item">ULTRA VFX</span><span class="ticker-item ticker-sep">·</span>
+    <span class="ticker-item">ULTRA GAMES</span><span class="ticker-item ticker-sep">·</span>
+    <span class="ticker-item">ADRIÁN CARMONA CÓRDOBA</span><span class="ticker-item ticker-sep">·</span>
+    <span class="ticker-item">MAYA</span><span class="ticker-item ticker-sep">·</span>
+    <span class="ticker-item">ZBRUSH</span><span class="ticker-item ticker-sep">·</span>
+    <span class="ticker-item">UNITY</span><span class="ticker-item ticker-sep">·</span>
+    <span class="ticker-item">NUKE</span><span class="ticker-item ticker-sep">·</span>
+  </div>
+</div>
+
+<!-- ================================================================
+     [ 01 ] ABOUT
+================================================================ -->
+<section id="about" class="section">
+  <span class="sec-num">01</span>
+  <div class="deco-circle"></div>
+  <div class="deco-circle-2"></div>
+  <div class="section-inner">
+    <p class="section-label reveal">
+      <span class="chapter-num">01</span>
+      <span data-en="Who I Am" data-es="Quién soy">Who I Am</span>
+    </p>
+    <h2 class="section-title reveal" data-en="3D Artist &amp;<br>Creator" data-es="Artista 3D &amp;<br>Creador">
+      3D Artist &amp;<br>Creator
+    </h2>
+    <div class="section-rule reveal"></div>
+
+    <div class="about-grid">
+      <div class="about-text reveal-l">
+        <p data-en="Hi! I'm Adrián — a 3D artist with a passion for modeling, sculpting, texturing and bringing digital worlds to life. Currently pursuing a Higher Degree in 3D Animation, Games &amp; Interactive Environments."
+           data-es="¡Hola! Soy Adrián — artista 3D apasionado por el modelado, la escultura, el texturizado y dar vida a mundos digitales. Actualmente cursando el Grado Superior de Animaciones 3D, Juegos y Entornos Interactivos.">
+          Hi! I'm Adrián — a <span class="hl">3D artist</span> with a passion for modeling, sculpting, texturing and bringing digital worlds to life. Currently pursuing a Higher Degree in 3D Animation, Games &amp; Interactive Environments.
+        </p>
+        <p data-en="My core is 3D: from high-poly character sculpts in ZBrush to environment design, product visualization and full VFX compositing pipelines. Beyond that, I've shipped games as a solo programmer and director, and I work fluently in Nuke and After Effects."
+           data-es="Mi núcleo es el 3D: desde esculturas de personajes high-poly en ZBrush hasta diseño de entornos, visualización de producto y pipelines VFX completos. Además, he lanzado videojuegos como programador y director en solitario, y trabajo fluidamente en Nuke y After Effects.">
+          My core is <span class="hl">3D</span>: from high-poly character sculpts in ZBrush to environment design, product visualization and full VFX compositing pipelines. Beyond that, I've shipped games as a solo programmer and director, and I work fluently in Nuke and After Effects.
+        </p>
+        <p data-en="I'm driven by creative, ambitious projects — in games, animation, film or TV. If it moves, lights up a screen or makes people feel something, I want to build it."
+           data-es="Me impulsan los proyectos creativos y ambiciosos — en juegos, animación, cine o televisión. Si se mueve, ilumina una pantalla o hace sentir algo a la gente, quiero construirlo.">
+          I'm driven by creative, ambitious projects — in games, animation, film or TV. If it <span class="hl">moves</span>, lights up a screen or makes people feel something, I want to build it.
+        </p>
+        <div style="display:flex;gap:0.75rem;flex-wrap:wrap;">
+          <a href="#work3d"  class="btn btn-primary" data-en="See my 3D work" data-es="Ver trabajo 3D">See my 3D work</a>
+          <a href="#contact" class="btn btn-ghost"   data-en="Let's talk"     data-es="Hablemos">Let's talk</a>
+        </div>
+      </div>
+
+      <div class="about-gallery reveal-r">
+        <div class="gallery-main">
+          <img id="galleryMain" src="images/renderBusto3Dimportante.jpeg" alt="3D work">
+          <div class="gallery-main-label" id="galleryLabel"
+               data-en="Character Bust — Blender · Cycles" data-es="Busto de Personaje — Blender · Cycles">
+            Character Bust — Blender · Cycles
+          </div>
+        </div>
+        <div class="gallery-thumbs">
+          <div class="g-thumb active" onclick="setGallery(0)" title="Character Bust">
+            <img src="images/renderBusto3Dimportante.jpeg" alt="Bust">
+          </div>
+          <div class="g-thumb" onclick="setGallery(1)" title="Dungeon Scene">
+            <img src="images/celda.jpg" alt="Dungeon">
+          </div>
+          <div class="g-thumb" onclick="setGallery(2)" title="Low Poly T-Rex">
+            <img src="images/renderTrexLowPoly3D.png" alt="T-Rex">
+          </div>
+          <div class="g-thumb" onclick="setGallery(3)" title="Bottle Render">
+            <img src="images/botella.jpg" alt="Bottle">
+          </div>
+          <div class="g-thumb" onclick="setGallery(4)" title="Donut Study">
+            <img src="images/renderdonut3D.jpg" alt="Donut">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
+     [ 02 ] SKILLS
+================================================================ -->
+<section id="skills" class="section section--light">
+  <span class="sec-num">02</span>
+  <div class="section-inner">
+    <p class="section-label reveal">
+      <span class="chapter-num">02</span>
+      <span data-en="Toolkit" data-es="Herramientas">Toolkit</span>
+    </p>
+    <h2 class="section-title reveal" data-en="Skills &amp;<br>Software" data-es="Habilidades &amp;<br>Software">
+      Skills &amp;<br>Software
+    </h2>
+    <div class="section-rule reveal"></div>
+
+    <!-- 3D & Sculpting -->
+    <div class="skills-group skills-group--3d reveal">
+      <p class="skills-group-title" data-en="3D · Sculpting · Texturing" data-es="3D · Escultura · Texturizado">
+        3D · Sculpting · Texturing
+      </p>
+      <div class="skills-grid">
+        <div class="skill-card">
+          <img class="skill-logo" src="images/logoblender.webp" alt="Blender">
+          <span class="skill-name">Blender</span>
+        </div>
+        <div class="skill-card">
+          <img class="skill-logo" src="images/mayalogo.png" alt="Autodesk Maya">
+          <span class="skill-name">Autodesk Maya</span>
+        </div>
+        <div class="skill-card">
+          <img class="skill-logo" src="images/zbrushlogo.png" alt="ZBrush">
+          <span class="skill-name">ZBrush</span>
+        </div>
+        <div class="skill-card">
+          <img class="skill-logo" src="images/3dsmaxlogo.png" alt="3ds Max">
+          <span class="skill-name">3ds Max</span>
+        </div>
+        <div class="skill-card">
+          <img class="skill-logo" src="images/logosubstance.webp" alt="Substance Painter">
+          <span class="skill-name">Substance Painter</span>
+        </div>
+        <div class="skill-card">
+          <span class="skill-icon-text">🌐</span>
+          <span class="skill-name">UV Mapping</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- VFX & Compositing -->
+    <div class="skills-group skills-group--vfx reveal">
+      <p class="skills-group-title" data-en="VFX · Compositing · Editing" data-es="VFX · Composición · Edición">
+        VFX · Compositing · Editing
+      </p>
+      <div class="skills-grid">
+        <div class="skill-card">
+          <img class="skill-logo" src="images/logonuke.png" alt="Nuke">
+          <span class="skill-name">Nuke</span>
+        </div>
+        <div class="skill-card">
+          <img class="skill-logo" src="images/logoaftereffects.png" alt="After Effects">
+          <span class="skill-name">After Effects</span>
+        </div>
+        <div class="skill-card">
+          <img class="skill-logo" src="images/logopremiere.png" alt="Premiere Pro">
+          <span class="skill-name">Premiere Pro</span>
+        </div>
+        <div class="skill-card">
+          <img class="skill-logo" src="images/logophotoshop.png" alt="Photoshop">
+          <span class="skill-name">Photoshop</span>
+        </div>
+        <div class="skill-card">
+          <img class="skill-logo" src="images/logoilustrator.png" alt="Illustrator">
+          <span class="skill-name">Illustrator</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Game Dev -->
+    <div class="skills-group skills-group--game reveal">
+      <p class="skills-group-title" data-en="Game Development · Programming" data-es="Desarrollo de Videojuegos · Programación">
+        Game Development · Programming
+      </p>
+      <div class="skills-grid">
+        <div class="skill-card">
+          <img class="skill-logo" src="images/logounity.png" alt="Unity">
+          <span class="skill-name">Unity 3D</span>
+        </div>
+        <div class="skill-card">
+          <img class="skill-logo" src="images/logocsharp.png" alt="C#">
+          <span class="skill-name">C#</span>
+        </div>
+        <div class="skill-card">
+          <span class="skill-icon-text">🎮</span>
+          <span class="skill-name">URP / HDRP</span>
+        </div>
+        <div class="skill-card">
+          <span class="skill-icon-text">🎯</span>
+          <span class="skill-name">Game Design</span>
+        </div>
+        <div class="skill-card">
+          <span class="skill-icon-text">👥</span>
+          <span class="skill-name">Team Lead</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ TICKER 02 ════════════════════════════════════════════ -->
+<div class="ticker ticker--teal">
+  <div class="ticker-track ticker-track--rev">
+    <span class="ticker-item">HIGH-POLY SCULPT</span><span class="ticker-item ticker-sep">·</span>
+    <span class="ticker-item">UV MAPPING</span><span class="ticker-item ticker-sep">·</span>
+    <span class="ticker-item">TEXTURE PAINTING</span><span class="ticker-item ticker-sep">·</span>
+    <span class="ticker-item">ENVIRONMENT DESIGN</span><span class="ticker-item ticker-sep">·</span>
+    <span class="ticker-item">CHARACTER MODELING</span><span class="ticker-item ticker-sep">·</span>
+    <span class="ticker-item">VFX COMPOSITING</span><span class="ticker-item ticker-sep">·</span>
+    <span class="ticker-item">GAME PROGRAMMING</span><span class="ticker-item ticker-sep">·</span>
+    <span class="ticker-item">HIGH-POLY SCULPT</span><span class="ticker-item ticker-sep">·</span>
+    <span class="ticker-item">UV MAPPING</span><span class="ticker-item ticker-sep">·</span>
+    <span class="ticker-item">TEXTURE PAINTING</span><span class="ticker-item ticker-sep">·</span>
+    <span class="ticker-item">ENVIRONMENT DESIGN</span><span class="ticker-item ticker-sep">·</span>
+    <span class="ticker-item">CHARACTER MODELING</span><span class="ticker-item ticker-sep">·</span>
+    <span class="ticker-item">VFX COMPOSITING</span><span class="ticker-item ticker-sep">·</span>
+    <span class="ticker-item">GAME PROGRAMMING</span><span class="ticker-item ticker-sep">·</span>
+  </div>
+</div>
+
+<!-- ================================================================
+     [ 03 ] DEMOS
+================================================================ -->
+<section id="demos" class="section">
+  <span class="sec-num">03</span>
+  <div class="deco-diamond"></div>
+  <div class="deco-diamond-2"></div>
+  <div class="section-inner">
+    <p class="section-label reveal">
+      <span class="chapter-num">03</span>
+      <span data-en="Showreel" data-es="Showreel">Showreel</span>
+    </p>
+    <h2 class="section-title reveal" data-en="Demo Reels" data-es="Demo Reels">Demo Reels</h2>
+    <div class="section-rule reveal"></div>
+
+    <div class="demos-grid">
+      <!-- DemoReel 2024 -->
+      <div class="reveal">
+        <p class="demo-label" data-en="DemoReel — 2024" data-es="DemoReel — 2024">DemoReel — 2024</p>
+        <div class="video-wrap" onclick="playVideo(this)">
+          <video preload="metadata">
+            <source src="images/DemoReel 3D  2024  Adrián Carmona Córdoba.mp4" type="video/mp4">
+          </video>
+          <div class="vid-thumb">
+            <div class="play-ring"></div>
+            <span class="vid-label" data-en="DemoReel 3D — 2024" data-es="DemoReel 3D — 2024">DemoReel 3D — 2024</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- DemoReel 2025 — Google Drive embed -->
+      <div class="reveal">
+        <p class="demo-label" data-en="DemoReel — 2025" data-es="DemoReel — 2025">DemoReel — 2025</p>
+        <div class="demo-iframe-wrap">
+          <iframe
+            src="https://drive.google.com/file/d/1myyKjZh8CRZ8iUCiNISu58aK-aO9Pb7Z/preview"
+            allow="autoplay"
+            allowfullscreen
+            loading="lazy"
+            title="DemoReel 2025 — Adrián Carmona Córdoba">
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
+     [ 04 ] 3D WORK — centrepiece
+================================================================ -->
+<section id="work3d" class="section">
+  <span class="sec-num">04</span>
+  <div class="section-inner">
+    <p class="section-label reveal">
+      <span class="chapter-num">04</span>
+      <span data-en="The craft" data-es="El oficio">The craft</span>
+    </p>
+    <h2 class="section-title reveal" data-en="3D Work" data-es="Trabajo 3D">3D Work</h2>
+    <div class="section-rule reveal"></div>
+
+    <!-- ArtStation CTA — TOP -->
+    <div class="work3d-cta reveal" style="margin-top:0;margin-bottom:2.5rem;">
+      <p data-en="See the full portfolio on ArtStation."
+         data-es="El portfolio completo está en ArtStation.">
+        See the full portfolio on ArtStation.
+      </p>
+      <a href="https://www.artstation.com/carmona17" target="_blank" class="btn btn-primary"
+         data-en="View ArtStation" data-es="Ver ArtStation">View ArtStation</a>
+    </div>
+
+    <!-- ART GALLERY GRID ───────────────────────────────────────
+         Layout (3-col):
+         Row 1: [renderBusto3D wide 2col] [renderBustoLowPoly 1col]
+         Row 2: [celda 1col] [renderMazmorra1 1col] [renderMazmorra2 1col]
+         Row 3: [renderTrexLowPoly wide 2col] [renderdonut 1col]
+         Row 4: [botella — full 3col]
+    ─────────────────────────────────────────────────────────── -->
+    <div class="art-grid reveal">
+
+      <!-- [ Character Bust — WIDE ] -->
+      <div class="art-item art-item--wide" onclick="openLightbox('images/renderBusto3Dimportante.jpeg')">
+        <button class="art-expand" onclick="openLightbox('images/renderBusto3Dimportante.jpeg');event.stopPropagation()">⤢</button>
+        <img src="images/renderBusto3Dimportante.jpeg" alt="Character Bust Render">
+        <div class="art-overlay">
+          <p class="art-cat art-cat--char" data-en="CHARACTER · HIGH POLY" data-es="PERSONAJE · HIGH POLY">CHARACTER · HIGH POLY</p>
+          <p class="art-title" data-en="Character Bust" data-es="Busto de Personaje">Character Bust</p>
+          <p class="art-tools">Blender · Cycles</p>
+        </div>
+      </div>
+
+      <!-- [ Low Poly Bust — MEDIUM ] -->
+      <div class="art-item" onclick="openLightbox('images/renderBustoLowPoly3D.png')">
+        <button class="art-expand" onclick="openLightbox('images/renderBustoLowPoly3D.png');event.stopPropagation()">⤢</button>
+        <img src="images/renderBustoLowPoly3D.png" alt="Low Poly Bust">
+        <div class="art-overlay">
+          <p class="art-cat art-cat--char" data-en="CHARACTER · LOW POLY" data-es="PERSONAJE · LOW POLY">CHARACTER · LOW POLY</p>
+          <p class="art-title" data-en="Low Poly Bust" data-es="Busto Low Poly">Low Poly Bust</p>
+          <p class="art-tools">Blender · Cycles</p>
+        </div>
+      </div>
+
+      <!-- [ Dungeon/Cell Scene ] -->
+      <div class="art-item" onclick="openLightbox('images/celda.jpg')">
+        <button class="art-expand" onclick="openLightbox('images/celda.jpg');event.stopPropagation()">⤢</button>
+        <img src="images/celda.jpg" alt="Dungeon Cell">
+        <div class="art-overlay">
+          <p class="art-cat art-cat--env" data-en="ENVIRONMENT · LIGHTING" data-es="ENTORNO · ILUMINACIÓN">ENVIRONMENT · LIGHTING</p>
+          <p class="art-title" data-en="Dungeon Cell" data-es="Celda de Mazmorra">Dungeon Cell</p>
+          <p class="art-tools">Maya · Arnold</p>
+        </div>
+      </div>
+
+      <!-- [ Mazmorra Low Poly 1 ] -->
+      <div class="art-item" onclick="openLightbox('images/renderMazmorra1LowPoly3D.jpeg')">
+        <button class="art-expand" onclick="openLightbox('images/renderMazmorra1LowPoly3D.jpeg');event.stopPropagation()">⤢</button>
+        <img src="images/renderMazmorra1LowPoly3D.jpeg" alt="Dungeon Low Poly 1">
+        <div class="art-overlay">
+          <p class="art-cat art-cat--env" data-en="ENVIRONMENT · LOW POLY" data-es="ENTORNO · LOW POLY">ENVIRONMENT · LOW POLY</p>
+          <p class="art-title" data-en="Dungeon — Low Poly" data-es="Mazmorra Low Poly">Dungeon — Low Poly</p>
+          <p class="art-tools">Blender · Cycles</p>
+        </div>
+      </div>
+
+      <!-- [ Mazmorra Low Poly 2 ] -->
+      <div class="art-item" onclick="openLightbox('images/renderMazmorraLowPoly23D.jpeg')">
+        <button class="art-expand" onclick="openLightbox('images/renderMazmorraLowPoly23D.jpeg');event.stopPropagation()">⤢</button>
+        <img src="images/renderMazmorraLowPoly23D.jpeg" alt="Dungeon Low Poly 2">
+        <div class="art-overlay">
+          <p class="art-cat art-cat--env" data-en="ENVIRONMENT · LOW POLY" data-es="ENTORNO · LOW POLY">ENVIRONMENT · LOW POLY</p>
+          <p class="art-title" data-en="Dungeon — Low Poly II" data-es="Mazmorra Low Poly II">Dungeon — Low Poly II</p>
+          <p class="art-tools">Blender · Cycles</p>
+        </div>
+      </div>
+
+      <!-- [ T-Rex Low Poly — WIDE ] -->
+      <div class="art-item art-item--wide" onclick="openLightbox('images/renderTrexLowPoly3D.png')">
+        <button class="art-expand" onclick="openLightbox('images/renderTrexLowPoly3D.png');event.stopPropagation()">⤢</button>
+        <img src="images/renderTrexLowPoly3D.png" alt="T-Rex Low Poly">
+        <div class="art-overlay">
+          <p class="art-cat art-cat--creature" data-en="CREATURE · LOW POLY" data-es="CRIATURA · LOW POLY">CREATURE · LOW POLY</p>
+          <p class="art-title" data-en="T-Rex Low Poly" data-es="T-Rex Low Poly">T-Rex Low Poly</p>
+          <!-- ✏️ ADD YOUR DESCRIPTION HERE -->
+          <p class="art-tools">Blender · Cycles</p>
+        </div>
+      </div>
+
+      <!-- [ Donut Study ] -->
+      <div class="art-item" onclick="openLightbox('images/renderdonut3D.jpg')">
+        <button class="art-expand" onclick="openLightbox('images/renderdonut3D.jpg');event.stopPropagation()">⤢</button>
+        <img src="images/renderdonut3D.jpg" alt="Donut Study">
+        <div class="art-overlay">
+          <p class="art-cat art-cat--study" data-en="FUNDAMENTALS · STUDY" data-es="FUNDAMENTOS · ESTUDIO">FUNDAMENTALS · STUDY</p>
+          <p class="art-title" data-en="Donut Study" data-es="Estudio Donut">Donut Study</p>
+          <!-- ✏️ ADD YOUR DESCRIPTION HERE -->
+          <p class="art-tools">Blender · Cycles</p>
+        </div>
+      </div>
+
+      <!-- [ Glass Bottle & Can — WIDE · image lightbox ] -->
+      <div class="art-item art-item--wide" onclick="openLightbox('images/botella.jpg')">
+        <button class="art-expand" onclick="openLightbox('images/botella.jpg');event.stopPropagation()">⤢</button>
+        <img src="images/botella.jpg" alt="Glass Bottle and Can Product Render">
+        <div class="art-overlay">
+          <p class="art-cat art-cat--product" data-en="PRODUCT · SHADING · LIGHTING" data-es="PRODUCTO · SHADING · ILUMINACIÓN">PRODUCT · SHADING · LIGHTING</p>
+          <p class="art-title" data-en="Glass Bottle &amp; Can" data-es="Botella de Cristal y Lata">Glass Bottle &amp; Can</p>
+          <p class="art-tools">Maya · Arnold · Photoshop</p>
+        </div>
+      </div>
+
+      <!-- [ Wine Bottle Animation — hover previews · click opens full video ] -->
+      <div class="art-item art-item--video-hover" onclick="openVideoLightbox('images/renderbotellavino3D.mp4')">
+        <button class="art-expand" onclick="openVideoLightbox('images/renderbotellavino3D.mp4');event.stopPropagation()">▶</button>
+        <div class="art-video-fill">
+          <video preload="none" muted loop playsinline>
+            <source src="images/renderbotellavino3D.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="art-overlay">
+          <p class="art-cat art-cat--product" data-en="PRODUCT · ANIMATION" data-es="PRODUCTO · ANIMACIÓN">PRODUCT · ANIMATION</p>
+          <p class="art-title" data-en="Wine Bottle" data-es="Botella de Vino">Wine Bottle</p>
+          <p class="art-tools">Blender · Cycles · Photoshop · Premiere</p>
+        </div>
+      </div>
+
+    </div><!-- /.art-grid -->
+
+    <!-- ArtStation CTA -->
+    <div class="work3d-cta reveal">
+      <p data-en="This is a selection — see the full portfolio on ArtStation."
+         data-es="Esta es una selección — el portfolio completo está en ArtStation.">
+        This is a selection — see the full portfolio on ArtStation.
+      </p>
+      <a href="https://www.artstation.com/carmona17" target="_blank" class="btn btn-primary"
+         data-en="View ArtStation" data-es="Ver ArtStation">View ArtStation</a>
+    </div>
+  </div>
+</section>
+
+<!-- ════ TICKER 03 ════════════════════════════════════════════ -->
+<div class="ticker ticker--gold">
+  <div class="ticker-track">
+    <span class="ticker-item">DENIAL</span><span class="ticker-item ticker-sep">·</span>
+    <span class="ticker-item">GHOUL GEYSER</span><span class="ticker-item ticker-sep">·</span>
+    <span class="ticker-item">NEUROSCAPE</span><span class="ticker-item ticker-sep">·</span>
+    <span class="ticker-item">SLOTVERSE</span><span class="ticker-item ticker-sep">·</span>
+    <span class="ticker-item">PSYCHOLOGICAL HORROR</span><span class="ticker-item ticker-sep">·</span>
+    <span class="ticker-item">2D WAVE SHOOTER</span><span class="ticker-item ticker-sep">·</span>
+    <span class="ticker-item">METROIDVANIA</span><span class="ticker-item ticker-sep">·</span>
+    <span class="ticker-item">UNITY 3D</span><span class="ticker-item ticker-sep">·</span>
+    <span class="ticker-item">C# PROGRAMMING</span><span class="ticker-item ticker-sep">·</span>
+    <span class="ticker-item">DENIAL</span><span class="ticker-item ticker-sep">·</span>
+    <span class="ticker-item">GHOUL GEYSER</span><span class="ticker-item ticker-sep">·</span>
+    <span class="ticker-item">NEUROSCAPE</span><span class="ticker-item ticker-sep">·</span>
+    <span class="ticker-item">SLOTVERSE</span><span class="ticker-item ticker-sep">·</span>
+    <span class="ticker-item">PSYCHOLOGICAL HORROR</span><span class="ticker-item ticker-sep">·</span>
+    <span class="ticker-item">2D WAVE SHOOTER</span><span class="ticker-item ticker-sep">·</span>
+    <span class="ticker-item">METROIDVANIA</span><span class="ticker-item ticker-sep">·</span>
+    <span class="ticker-item">UNITY 3D</span><span class="ticker-item ticker-sep">·</span>
+    <span class="ticker-item">C# PROGRAMMING</span><span class="ticker-item ticker-sep">·</span>
+  </div>
+</div>
+
+<!-- ================================================================
+     [ 05 ] GAME DEV
+================================================================ -->
+<section id="gamedev" class="section">
+  <span class="sec-num">05</span>
+  <div class="deco-line"></div>
+  <div class="section-inner">
+    <p class="section-label reveal">
+      <span class="chapter-num">05</span>
+      <span data-en="Videogames" data-es="Videojuegos">Videogames</span>
+    </p>
+    <h2 class="section-title reveal" data-en="Game<br>Development" data-es="Desarrollo de<br>Videojuegos">Game<br>Development</h2>
+    <div class="section-rule reveal"></div>
+
+    <!-- itch.io CTA — TOP -->
+    <div class="work3d-cta reveal" style="margin-top:0;margin-bottom:2.5rem;">
+      <p data-en="All my games are available on itch.io."
+         data-es="Todos mis juegos están disponibles en itch.io.">
+        All my games are available on itch.io.
+      </p>
+      <a href="https://carmonaa-al.itch.io" target="_blank" class="btn btn-primary"
+         data-en="Visit my itch.io" data-es="Ver mi itch.io">Visit my itch.io</a>
+    </div>
+
+    <!-- DENIAL -->
+    <div class="acc-card reveal" id="acc-denial">
+      <div class="acc-head" onclick="toggleAcc('acc-denial')">
+        <div class="acc-head-left">
+          <span class="acc-tag">Psychological Horror · Unity 3D</span>
+          <h3 class="acc-title">Denial</h3>
+        </div>
+        <div class="acc-icon">+</div>
+      </div>
+      <div class="acc-body">
+        <div class="acc-inner">
+          <p class="proj-desc"
+             data-en="A psychological horror game in which you will immerse yourself in Joshua's most traumatic and determining episodes of schizophrenia, which will make you discover a little more of his disorder and accept that &ldquo;it is only the first stage of grief, the DENIAL&rdquo;."
+             data-es="Un juego de terror psicológico en el que te sumergirás en los episodios más traumáticos y determinantes de esquizofrenia de Joshua, que te harán descubrir un poco más de su trastorno y aceptar que &ldquo;es solo la primera etapa del duelo, la NEGACIÓN&rdquo;.">
+            A psychological horror game in which you will immerse yourself in Joshua's most traumatic and determining episodes of schizophrenia, which will make you discover a little more of his disorder and accept that &ldquo;it is only the first stage of grief, the DENIAL&rdquo;.
+          </p>
+          <div class="proj-meta">
+            <span class="meta-k" data-en="My Role" data-es="Mi rol">My Role</span>
+            <span class="meta-v" data-en="Only programmer &amp; director of the videogame — Unity engine, C#, team management and optimization" data-es="Único programador y director del videojuego — motor Unity, C#, gestión de equipo y optimización">Only programmer &amp; director of the videogame — Unity engine, C#, team management and optimization</span>
+
+            <span class="meta-k" data-en="Team" data-es="Equipo">Team</span>
+            <span class="meta-v">Emma Fernández · Jairo Navalpotro · Pablo Torres · Natalia Penedo · Eva Valladolid · Unai Pons · Sergio Quesada · Adrián García · Adrián Carmona</span>
+
+            <span class="meta-k" data-en="Software" data-es="Software">Software</span>
+            <span class="meta-v">Unity 3D (URP) · Autodesk Maya · Adobe Photoshop · ZBrush · Adobe Substance Painter · Adobe Audition · C#</span>
+          </div>
+
+          <div class="video-wrap" onclick="playVideo(this)" style="max-width:800px;margin-bottom:1.5rem;">
+            <video preload="metadata">
+              <source src="images/PreviewDenial.mp4" type="video/mp4">
+            </video>
+            <div class="vid-thumb">
+              <div class="play-ring"></div>
+              <span class="vid-label" data-en="Denial — Gameplay Preview" data-es="Denial — Avance de juego">Denial — Gameplay Preview</span>
             </div>
+          </div>
+
+          <div class="proj-actions">
+            <a href="https://carmonaa-al.itch.io/denial" target="_blank" class="btn btn-primary"
+               data-en="Play on itch.io" data-es="Jugar en itch.io">Play on itch.io</a>
+            <a href="https://carmonaa-al.itch.io/denial" target="_blank" class="btn btn-ghost"
+               data-en="Download Denial" data-es="Descargar Denial">Download Denial</a>
+          </div>
         </div>
-    </nav>
+      </div>
+    </div>
 
+    <!-- GHOUL GEYSER -->
+    <div class="acc-card reveal" id="acc-ghoul">
+      <div class="acc-head" onclick="toggleAcc('acc-ghoul')">
+        <div class="acc-head-left">
+          <span class="acc-tag">2D · Wave Shooter · Solo</span>
+          <h3 class="acc-title">Ghoul Geyser</h3>
+        </div>
+        <div class="acc-icon">+</div>
+      </div>
+      <div class="acc-body">
+        <div class="acc-inner">
+          <p class="proj-desc"
+             data-en="A 2D wave-based game in which the player must face hordes of enemies that increase in difficulty with each round. The main feature of Ghoul Geyser is its focus on fast action and its constant wave dynamics, with increasing difficulty as the player progresses."
+             data-es="Un juego 2D de oleadas en el que el jugador debe enfrentarse a hordas de enemigos que aumentan en dificultad con cada ronda. La característica principal de Ghoul Geyser es su enfoque en la acción rápida y sus constantes dinámicas de oleadas, con dificultad creciente a medida que el jugador avanza.">
+            A 2D wave-based game in which the player must face hordes of enemies that increase in difficulty with each round. The main feature of Ghoul Geyser is its focus on fast action and its constant wave dynamics, with increasing difficulty as the player progresses.
+          </p>
+          <div class="proj-meta">
+            <span class="meta-k" data-en="My Role" data-es="Mi rol">My Role</span>
+            <span class="meta-v" data-en="Videogame developed alone — difficulty progression system, enemy programming and HUD using Unity and C#. System design and gameplay balancing." data-es="Videojuego desarrollado en solitario — sistema de progresión de dificultad, programación de enemigos y HUD con Unity y C#. Diseño de sistemas y balanceo de gameplay.">Videogame developed alone — difficulty progression system, enemy programming and HUD using Unity and C#. System design and gameplay balancing.</span>
+            <span class="meta-k" data-en="Software" data-es="Software">Software</span>
+            <span class="meta-v">Unity 2D · Photoshop · C#</span>
+          </div>
 
-
-
-
-    <!-- Sección Sobre mí -->
-    <section id="sobre-mi" class="py-5">
-        <div class="container text-center">
-            <h1 class="mb-4 fs-1">Who I am?</h1>
-            <p class="mb-5 fs-5">Hi! I'm passionate about 3D and videogame development, with experience in modeling, texturing, animation and game mechanics design. Currently, I am pursuing a higher degree in 3D Animation, games and interactive environments, where I have honed my skills in tools such as Maya, ZBrush, Unity, Nuke, Premiere, Photoshop, Illustrator and After Effects, among others.</p>
-
-            <p class="mb-5 fs-5"> My goal is to be part of creative and challenging projects that allow me to learn and grow in this industry, bringing my passion for texturing and interactive storytelling. I'm excited about working in a team and creating experiences that connect with people, in video games, animation projects, film, television... In short, everything related to audiovisual entertainment.</p>
-                
-            <p class="mb-5 fs-5"> Explore my work, and don't hesitate to get in touch if you want to collaborate or just chat about creative projects!</p>
-            
-
-            <!-- carrusel -->
-
-            <div class="container" id="slideshow-3">
-        
-                <div class="mySlides" style="display: none;">
-                    <img class="slideshow" src="images/celda.jpg">
-                </div>
-
-                <div class="mySlides" style="display: none;">
-                    <img class="slideshow" src="images/ghoulgeyser.png">
-                </div>
-
-                <div class="mySlides" style="display: none;">
-                    <img class="slideshow" src="images/busto.jpg">
-                </div>
-
-                <div class="mySlides" style="display: none;">
-                    <img class="slideshow" src="images/slotverse5.png">
-                </div>
-
-                <div class="mySlides" style="display: none;">
-                    <img class="slideshow" src="images/botella.jpg">
-                </div>
-    
-                <a class="prev" onclick="plusSlides(-1, 'slideshow-3')" style="font-weight:bold; text-decoration:none;">❮</a>
-                <a class="next" onclick="plusSlides(1, 'slideshow-3')" style="font-weight:bold; text-decoration:none;">❯</a>
-
-
-            <div class="row">
-                <div class="column">
-                    <img class="demo cursor" src="images/celda.jpg" style="width:100%" onclick="currentSlide(1, 'slideshow-3')" alt="Vista superior de la zona de demos">
-                </div>
-                <div class="column">
-                    <img class="demo cursor" src="images/ghoulgeyser.png" style="width:100%" onclick="currentSlide(2, 'slideshow-3')" alt="Vista superior de la zona de demos">
-                </div>
-                <div class="column">
-                    <img class="demo cursor" src="images/busto.jpg" style="width:100%" onclick="currentSlide(3, 'slideshow-3')" alt="Vista superior de la zona de demos">
-                </div>
-               <div class="column">
-                    <img class="demo cursor" src="images/slotverse5.png" style="width:100%" onclick="currentSlide(4, 'slideshow-3')" alt="Vista superior de la zona de demos">
-                </div>
-                <div class="column">
-                    <img class="demo cursor" src="images/botella.jpg" style="width:100%" onclick="currentSlide(5, 'slideshow-3')" alt="Vista superior de la zona de demos">
-                </div>
-
+          <div class="proj-gallery" style="margin-bottom:1.5rem;">
+            <div class="proj-img-wrap" onclick="openLightbox('images/ghoul1.png')">
+              <img src="images/ghoul1.png" alt="Ghoul Geyser 1">
             </div>
-        </div>
-
-
-
-            <!-- Carrusel de imágenes
-            <div id="carrusel" class="carousel slide" data-bs-interval="false">
-                <div class="carousel-indicators">
-                    <button type="button" data-bs-target="#carrusel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                    <button type="button" data-bs-target="#carrusel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                    <button type="button" data-bs-target="#carrusel" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                    <button type="button" data-bs-target="#carrusel" data-bs-slide-to="3" aria-label="Slide 4"></button>
-                    <button type="button" data-bs-target="#carrusel" data-bs-slide-to="4" aria-label="Slide 5"></button>
-                </div>
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img src="images/celda.jpg" class="d-block mx-auto w-50" alt="Lighting">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="images/ghoulgeyser.png" class="d-block mx-auto w-50" alt="Game Development">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="images/busto.jpg" class="d-block mx-auto w-25" alt="Modeling">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="images/slotverse.jpg" class="d-block mx-auto w-50" alt="Game Development">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="images/botella.jpg" class="d-block mx-auto w-50" alt="Shading">
-                    </div>
-                </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carrusel" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carrusel" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>                
-            </div> -->
-        </div>
-    </section>
-
-    <!-- Sección Demos -->
-    <section id="demos" class="py-5">
-        <div class="container text-center">
-            <h1 class="mb-5 fs-1">Demos</h1>
-            <h1 class="mb-4 fs-4">DemoReel 2024</h1>
-            <div class="video-container">
-                <video controls class="w-100">
-                    <source src="images/DemoReel 3D  2024  Adrián Carmona Córdoba.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
+            <div class="proj-img-wrap" onclick="openLightbox('images/ghoul2.png')">
+              <img src="images/ghoul2.png" alt="Ghoul Geyser 2">
             </div>
-            <div><p class="mb-5 fs-5">   </p></div>
-            <h1 class="mb-4 fs-4">DemoReel 2025</h1>
-            <div class="video-container">
-                <a href="https://drive.google.com/file/d/1myyKjZh8CRZ8iUCiNISu58aK-aO9Pb7Z/view?usp=sharing" target="_blank" style="display:block;">
-                    <img src="images/demoreel2025.jpg" alt="DemoReel 2025" class="w-100" style="border:5px solid #6a0dad; border-radius:10px;">
-                </a>
+            <div class="proj-img-wrap" onclick="openLightbox('images/ghoul3.png')">
+              <img src="images/ghoul3.png" alt="Ghoul Geyser 3">
             </div>
-        </div>
-    </section>
-
-    <!-- Sección Proyectos -->
-    <section id="proyectos" class="py-5">
-        <div class="container-fluid">
-            <h2 class="text-center mb-4 fs-1">My projects</h2>
-            <div><p class="mb-3 fs-5">   </p></div>
-            <div class="row justify-content-center">
-                <!-- Generalista 3D -->
-                <div class="col-md-8 mb-4">
-                    <div class="card card-custom-width">
-                        <div class="card-header fs-4">3D Generalist</div>
-                        <div class="card-body fs-6">
-                            <p>Throughout my training, I have gained experience in the field of 3D modeling, using professional tools such as Maya, 3ds Max and ZBrush. I have learned to create detailed 3D models, both for characters and environments, mastering advanced texturing and UV mapping techniques to achieve realistic and high quality finishes.</p>
-
-                            <p>In addition, I have experience working with Nuke, where I have explored its compositing environment, integrations and workflows. I have learned how to perform complex compositing, combining 3D elements with live images to create coherent and quality visual effects. My focus in Nuke is on achieving clean and effective integrations, working with layers, effects and masks to enhance the visual narrative of each project.</p>
-                            
-                            <p>Thanks to my knowledge in these tools, I can develop complete projects, from modeling and texturing to integration and compositing, ensuring optimal quality at every stage of the creative process.</p>
-                            
-                            <div class="container" id="slideshow-8">
-                                <div class="mySlides" style="display: none;">
-                                    <img class="slideshow" src="images/render1.png">
-                                </div>
-                                <div class="mySlides" style="display: none;">
-                                    <img class="slideshow" src="images/render.png">
-                                </div>
-                                <div class="mySlides" style="display: none;">
-                                <video class="slideshow" controls>
-                                    <source src="images/animacion.mp4" type="video/mp4">
-                                    Your browser does not support the video tag.
-                                </video>
-                                </div>
-                                
-                                <a class="prev" onclick="plusSlides(-1, 'slideshow-8')" style="font-weight:bold; text-decoration:none;">❮</a>
-                                <a class="next" onclick="plusSlides(1, 'slideshow-8')" style="font-weight:bold; text-decoration:none;">❯</a>
-                                <div class="row">
-                                    <div class="column">
-                                        <img class="demo cursor" src="images/render1.png" style="width:100%" onclick="currentSlide(1, 'slideshow-8')" alt="render1">
-                                    </div>
-                                    <div class="column">
-                                        <img class="demo cursor" src="images/render.png" style="width:100%" onclick="currentSlide(2, 'slideshow-8')" alt="render2">
-                                    </div>
-                                    <div class="column">
-                                        <img class="demo cursor" src="images/animacion.png" style="width:100%" onclick="currentSlide(3, 'slideshow-8')" alt="animacion">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <a href="https://carmona17.artstation.com/" class="btn btn-custom-purple" target="_blank">Show Artstation</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Desarrollador de videojuegos -->
-                <div class="col-md-8 mb-4">
-                    <div class="card card-custom-width">
-                        <div class="card-header fs-4">Videogame Developer</div>
-                        <div class="card-body fs-6">
-                            <p class="mb-3 fs-5"><strong>Denial</strong></p>
-                            <p>This is a psychological horror game in which you will immerse yourself in Joshua's most traumatic and 
-                                determining episodes of schizophrenia, which will make you discover 
-                                a little more of his disorder and accept that "it is only the first stage of grief, the DENIAL".</p>
-                            <p><strong>Duties performed:</strong> This game is the most ambitious project I have worked on so far. 
-                                With the help of Emma Fernández, Jairo Navalpotro, Pablo Torres, Natalia Penedo, Eva Valladolid, Unai Pons, 
-                                Sergio Quesada and Adrián García; we have developed this narrative and audiovisual experience through the videogame 
-                                environment. With my role as the only programmer as well as director of the videogame, I have developed my skills with
-                                the Unity graphics engine as well as my knowledge of C#, and above all team management and optimization. </p>
-                            <p><strong>Software used:</strong> Unity 3D | URP, Autodesk Maya, Adobe Phostoshop, Zbrush, Adobe Substance Painter, Adobe Audition</p>
-                            <p><strong>Preview | Available now on  <a href="https://carmonaa-al.itch.io/denial" class="btn btn-custom-purple" target="_blank">itch.io</a></strong></p>
-                            <div class="video-container">
-                                <video controls class="w-100">
-                                    <source src="images/PreviewDenial.mp4" type="video/mp4">
-                                    Your browser does not support the video tag.
-                                </video>
-                            </div>
-
-                            <p> </p>
-                            <a href="https://carmonaa-al.itch.io/denial" class="btn btn-custom-purple" target="_blank">Download Denial</a>
-                        </div>
-                        <div class="card-body fs-6">
-                            <p class="mb-3 fs-5"><strong>Ghoul Geyser</strong></p>
-                            <p>I have developed a 2D video game called <strong>Ghoul Geyser</strong>, a 2D wave-based game in which the player must face hordes of enemies that increase in difficulty with each round. The main feature of Ghoul Geyser is its focus on fast action and its constant wave dynamics, with increasing difficulty as the player progresses.</p>
-                            <p><strong>Duties performed:</strong> Videogame developed alone, where I designed the difficulty progression system, enemy programming and HUD using Unity and C#. This project allowed me to develop skills in system design and gameplay balancing.</p>
-                            <p><strong>Software used:</strong> Unity 2D, Photoshop</p>
-                            <div class="d-flex align-items-center mt-3" style="font-size: 1rem;">
-                                <p class="mb-0 me-2" style="font-size: 1rem;"><strong>Available now on</strong></p>
-                                <a href="https://carmonaa-al.itch.io/ghoul-geyser" class="btn btn-custom-purple btn" target="_blank">itch.io</a>
-                            </div>
-                            <!-- Carrusel de imágenes dentro del panel de videojuegos -->
-                            <div class="container" id="slideshow-4">
-        
-                                <div class="mySlides" style="display: none;">
-                                    <img class="slideshow" src="images/ghoul3.png">
-                                </div>
-
-                                <div class="mySlides" style="display: none;">
-                                    <img class="slideshow" src="images/ghoul1.png">
-                                </div>
-
-                                <div class="mySlides" style="display: none;">
-                                    <img class="slideshow" src="images/ghoul2.png">
-                                </div>
-
-                            <a class="prev" onclick="plusSlides(-1, 'slideshow-4')" style="font-weight:bold; text-decoration:none;">❮</a>
-                            <a class="next" onclick="plusSlides(1, 'slideshow-4')" style="font-weight:bold; text-decoration:none;">❯</a>
-
-                            <div class="row">
-                                <div class="column">
-                                    <img class="demo cursor" src="images/ghoul3.png" style="width:100%" onclick="currentSlide(1, 'slideshow-4')" alt="Ghoul Geyser 1">
-                                </div>
-                                <div class="column">
-                                    <img class="demo cursor" src="images/ghoul1.png" style="width:100%" onclick="currentSlide(2, 'slideshow-4')" alt="Ghoul Geyser 2">
-                                </div>
-                                <div class="column">
-                                    <img class="demo cursor" src="images/ghoul2.png" style="width:100%" onclick="currentSlide(3, 'slideshow-4')" alt="Ghoul Geyser 3">
-                                </div>
-                            </div>
-                            </div>
-                                <a href="https://carmonaa-al.itch.io/ghoul-geyser" class="btn btn-custom-purple btn mt-3" style="float:left;" target="_blank">Download Ghoul Geyser</a>
-                        </div>
-                        <div class="card-body fs-6">
-                            <p class="mb-3 fs-5"><strong>NeuroScape - Resurgence</strong></p>
-                            <p><strong>NeuroScape – Resurgence</strong> is a 2D metroidvania with cyberpunk aesthetics, set in a dystopian future where machines control humanity. The player explores a fragmented world, gains new abilities, and uncovers the truth behind a lost rebellion.</p>
-                            <p><strong>Duties performed:</strong> Worked in a team of three as lead programmer, project manager, and narrative/creative director. I implemented core systems, coordinated the team, and led the storytelling direction.</p>
-                            <p><strong>Software used:</strong> Unity 2D, Photoshop</p>
-                            <div class="d-flex align-items-center mt-3" style="font-size: 1rem;">
-                                <p class="mb-0 me-2" style="font-size: 1rem;"><strong>Available now on</strong></p>
-                                <a href="https://carmonaa-al.itch.io/neuroscape-resurgence" class="btn btn-custom-purple btn" target="_blank">itch.io</a>
-                            </div>
-                            <div class="container" id="slideshow-6">
-                                <div class="mySlides" style="display: none;">
-                                    <img class="slideshow" src="images/neuroscape1.png">
-                                </div>
-                                <div class="mySlides" style="display: none;">
-                                    <img class="slideshow" src="images/neuroscape2.png">
-                                </div>
-                                <div class="mySlides" style="display: none;">
-                                    <img class="slideshow" src="images/neuroscape3.png">
-                                </div>
-                                <div class="mySlides" style="display: none;">
-                                    <img class="slideshow" src="images/neuroscape4.png">
-                                </div>
-                                <div class="mySlides" style="display: none;">
-                                    <img class="slideshow" src="images/neuroscape5.png">
-                                </div>
-                                <a class="prev" onclick="plusSlides(-1, 'slideshow-6')" style="font-weight:bold; text-decoration:none;">❮</a>
-                                <a class="next" onclick="plusSlides(1, 'slideshow-6')" style="font-weight:bold; text-decoration:none;">❯</a>
-                                <div class="row">
-                                    <div class="column">
-                                        <img class="demo cursor" src="images/neuroscape1.png" style="width:100%" onclick="currentSlide(1, 'slideshow-6')" alt="NeuroScape 1">
-                                    </div>
-                                    <div class="column">
-                                        <img class="demo cursor" src="images/neuroscape2.png" style="width:100%" onclick="currentSlide(2, 'slideshow-6')" alt="NeuroScape 2">
-                                    </div>
-                                    <div class="column">
-                                        <img class="demo cursor" src="images/neuroscape3.png" style="width:100%" onclick="currentSlide(3, 'slideshow-6')" alt="NeuroScape 3">
-                                    </div>
-                                    <div class="column">
-                                        <img class="demo cursor" src="images/neuroscape4.png" style="width:100%" onclick="currentSlide(4, 'slideshow-6')" alt="NeuroScape 3">
-                                    </div>
-                                    <div class="column">
-                                        <img class="demo cursor" src="images/neuroscape5.png" style="width:100%" onclick="currentSlide(5, 'slideshow-6')" alt="NeuroScape 3">
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="https://carmonaa-al.itch.io/neuroscape-resurgence" class="btn btn-custom-purple btn mt-3" style="float:left;" target="_blank">Download NeuroScape - Resurgence</a>
-                        </div>
-                        <div class="card-body fs-6">
-                            <p class="mb-3 fs-5"><strong>SlotVerse</strong></p>
-                            <p><strong>SlotVerse</strong> is a game developed for a <strong>Game Jam</strong>, where each match offers a unique experience. Players spin a slot machine to randomly combine a game mode, enemy type, and setting, generating a different game scenario every time. The result can be anything from a chaotic top-down shooter to a high-speed 2.5D racing challenge, each with its own mechanics and enemy behaviors.</p>
-                            <p><strong>Duties performed:</strong> Worked as 3D modeler and UI designer/programmer. I created in-game assets and designed the interface logic, ensuring clarity and consistency across randomly generated game modes.</p>
-                            <p><strong>Software used:</strong> Unity 3D | 2D, Photoshop, Autodesk Maya, Substance Painter.</p>
-                            <div class="d-flex align-items-center mt-3" style="font-size: 1rem;">
-                                <p class="mb-0 me-2" style="font-size: 1rem;"><strong>Available now on</strong></p>
-                                <a href="https://miguelrico2031.itch.io/slotverse" class="btn btn-custom-purple btn" target="_blank">itch.io</a>
-                            </div>
-                            <!-- Slideshow exclusivo para Slotverse -->
-                            <div class="container" id="slideshow-7">
-                                <div class="mySlides" style="display: none;">
-                                    <img class="slideshow" src="images/slotverse1.png">
-                                </div>
-                                <div class="mySlides" style="display: none;">
-                                    <img class="slideshow" src="images/slotverse2.png">
-                                </div>
-                                <div class="mySlides" style="display: none;">
-                                    <img class="slideshow" src="images/slotverse3.png">
-                                </div>
-                                <div class="mySlides" style="display: none;">
-                                    <img class="slideshow" src="images/slotverse4.png">
-                                </div>
-                                <a class="prev" onclick="plusSlides(-1, 'slideshow-7')" style="font-weight:bold; text-decoration:none;">❮</a>
-                                <a class="next" onclick="plusSlides(1, 'slideshow-7')" style="font-weight:bold; text-decoration:none;">❯</a>
-                                <div class="row">
-                                    <div class="column">
-                                        <img class="demo cursor" src="images/slotverse1.png" style="width:100%" onclick="currentSlide(1, 'slideshow-7')" alt="Slotverse 1">
-                                    </div>
-                                    <div class="column">
-                                        <img class="demo cursor" src="images/slotverse2.png" style="width:100%" onclick="currentSlide(2, 'slideshow-7')" alt="Slotverse 2">
-                                    </div>
-                                    <div class="column">
-                                        <img class="demo cursor" src="images/slotverse3.png" style="width:100%" onclick="currentSlide(3, 'slideshow-7')" alt="Slotverse 3">
-                                    </div>
-                                    <div class="column">
-                                        <img class="demo cursor" src="images/slotverse4.png" style="width:100%" onclick="currentSlide(4, 'slideshow-7')" alt="Slotverse 4">
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="https://miguelrico2031.itch.io/slotverse" class="btn btn-custom-purple btn mt-3" style="float:left;" target="_blank">Download SlotVerse</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Composer section -->
-                <div class="col-md-8 mb-4">
-                    <div class="card card-custom-width">
-                        <div class="card-header fs-4">Composer | VFX Artist</div>
-                        <div class="card-body fs-">
-                            <p>I have experience in visual effects and composition using professional tools like Nuke and After Effects. My work focuses on creating seamless integrations and engaging visual effects that enhance the narrative quality of each project.</p>
-                            <p><strong>Duties performed:</strong> Development of visual effects, color correction, compositing of 3D elements with live footage, and creation of dynamic transitions.</p>
-                            <p><strong>Software used:</strong> Nuke, After Effects, Premiere Pro</p>
-                            
-                            <!-- Nuevo carrusel tipo slideshow -->
-                            <div class="container" id="slideshow-5">
-                <div class="mySlides" style="display: none;">
-                    <video class="slideshow" controls>
-                        <source src="images/compo2.mp4" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-                </div>
-                <div class="mySlides" style="display: none;">
-                    <video class="slideshow" controls>
-                        <source src="images/compo3.mp4" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-                </div>
-                <div class="mySlides" style="display: none;">
-                    <video class="slideshow" controls>
-                        <source src="images/compo4.mp4" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-                </div>
-                <div class="mySlides" style="display: none;">
-                    <video class="slideshow" controls>
-                        <source src="images/compo5.mp4" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-                </div>
-                <a class="prev" onclick="plusSlides(-1, 'slideshow-5')" style="font-weight:bold; text-decoration:none;">❮</a>
-                <a class="next" onclick="plusSlides(1, 'slideshow-5')" style="font-weight:bold; text-decoration:none;">❯</a>
-                <div class="row">
-                    <div class="column">
-                        <img class="demo cursor" src="images/compo1.png" style="width:100%" onclick="currentSlide(1, 'slideshow-5')" alt="Compo2">
-                    </div>
-                    <div class="column">
-                        <img class="demo cursor" src="images/compo2.png" style="width:100%" onclick="currentSlide(2, 'slideshow-5')" alt="Compo3">
-                    </div>
-                    <div class="column">
-                        <img class="demo cursor" src="images/compo5.png" style="width:100%" onclick="currentSlide(3, 'slideshow-5')" alt="VFX 3">
-                    </div>
-                    <div class="column">
-                        <img class="demo cursor" src="images/compo4.png" style="width:100%" onclick="currentSlide(4, 'slideshow-5')" alt="VFX 4">
-                    </div>
-                </div>
-                </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="proj-img-wrap" onclick="openLightbox('images/gg1.png')">
+              <img src="images/gg1.png" alt="Ghoul Geyser gameplay 1">
             </div>
+            <div class="proj-img-wrap" onclick="openLightbox('images/gg2.png')">
+              <img src="images/gg2.png" alt="Ghoul Geyser gameplay 2">
+            </div>
+            <div class="proj-img-wrap" onclick="openLightbox('images/gg3.png')">
+              <img src="images/gg3.png" alt="Ghoul Geyser gameplay 3">
+            </div>
+          </div>
+
+          <div class="proj-actions">
+            <a href="https://carmonaa-al.itch.io/ghoul-geyser" target="_blank" class="btn btn-primary"
+               data-en="Download Ghoul Geyser" data-es="Descargar Ghoul Geyser">Download Ghoul Geyser</a>
+          </div>
         </div>
-    </section>
+      </div>
+    </div>
 
-    <section id="cv" class="py-5">
-        <div class="container text-center fs-3">
-            <h1 class="mb-3 fs-1">My CV</h1>
-            <a href="docs/CV Adrián Carmona Córdoba_Inglés.pdf" target="_blank" class="btn btn-custom-purple btn-lg">
-                Show my CV
-            </a>
+    <!-- NEUROSCAPE – RESURGENCE -->
+    <div class="acc-card reveal" id="acc-neuroscape">
+      <div class="acc-head" onclick="toggleAcc('acc-neuroscape')">
+        <div class="acc-head-left">
+          <span class="acc-tag">2D · Metroidvania · Cyberpunk</span>
+          <h3 class="acc-title">NeuroScape – Resurgence</h3>
         </div>
-    </section>
-
-    <section id="contact" class="py-5">
-        <div class="container text-center fs-3">
-            <h1 class="mb-3 fs-1">Contact</h1>
-            <a href="https://carmonaa-al.itch.io" target="_blank" download class="btn btn-custom-purple btn-lg">
-                ITCH.IO
-            </a>
-            <a href="https://www.linkedin.com/in/adrián-carmona-córdoba/" target="_blank" download class="btn btn-custom-purple btn-lg">
-                LINKEDIN
-            </a>
-            <a href="https://carmona17.artstation.com/" target="_blank" download class="btn btn-custom-purple btn-lg">
-                ARTSTATION
-            </a>
+        <div class="acc-icon">+</div>
+      </div>
+      <div class="acc-body">
+        <div class="acc-inner">
+          <p class="proj-desc"
+             data-en="A 2D metroidvania with cyberpunk aesthetics, set in a dystopian future where machines control humanity. The player explores a fragmented world, gains new abilities, and uncovers the truth behind a lost rebellion."
+             data-es="Un metroidvania 2D con estética cyberpunk, ambientado en un futuro distópico donde las máquinas controlan a la humanidad. El jugador explora un mundo fragmentado, adquiere nuevas habilidades y descubre la verdad detrás de una rebelión perdida.">
+            A 2D metroidvania with cyberpunk aesthetics, set in a dystopian future where machines control humanity. The player explores a fragmented world, gains new abilities, and uncovers the truth behind a lost rebellion.
+          </p>
+          <div class="proj-meta">
+            <span class="meta-k" data-en="My Role" data-es="Mi rol">My Role</span>
+            <span class="meta-v" data-en="Lead programmer · Project manager · Narrative &amp; creative director — implemented core systems, coordinated the team and led the storytelling direction." data-es="Programador principal · Director de proyecto · Director narrativo y creativo — implementé los sistemas principales, coordiné el equipo y dirigí la dirección narrativa.">Lead programmer · Project manager · Narrative &amp; creative director — implemented core systems, coordinated the team and led the storytelling direction.</span>
+            <span class="meta-k" data-en="Team" data-es="Equipo">Team</span>
+            <span class="meta-v" data-en="Team of three" data-es="Equipo de tres personas">Team of three</span>
+            <span class="meta-k" data-en="Software" data-es="Software">Software</span>
+            <span class="meta-v">Unity 2D · Photoshop · C#</span>
+          </div>
+          <div class="proj-actions">
+            <a href="https://carmonaa-al.itch.io/neuroscape-resurgence" target="_blank" class="btn btn-primary"
+               data-en="Download NeuroScape" data-es="Descargar NeuroScape">Download NeuroScape</a>
+          </div>
         </div>
-        <div><p class="mb-3 fs-5">   </p></div>
-    </section>
+      </div>
+    </div>
 
-    <!-- Pie de página -->
-    <footer class="py-4 text-center">
-        <div class="container">
-            <p>2025 Adrián Carmona Córdoba | Portfolio</p>
-            <p>adriancarmonacordoba@gmail.com</p>
+    <!-- SLOTVERSE -->
+    <div class="acc-card reveal" id="acc-slotverse">
+      <div class="acc-head" onclick="toggleAcc('acc-slotverse')">
+        <div class="acc-head-left">
+          <span class="acc-tag">Game Jam · Unity 3D</span>
+          <h3 class="acc-title">SlotVerse</h3>
         </div>
-    </footer>
+        <div class="acc-icon">+</div>
+      </div>
+      <div class="acc-body">
+        <div class="acc-inner">
+          <p class="proj-desc"
+             data-en="SlotVerse is a game developed for a Game Jam, where each match offers a unique experience. Players spin a slot machine to randomly combine a game mode, enemy type, and setting, generating a different game scenario every time. The result can be anything from a chaotic top-down shooter to a high-speed 2.5D racing challenge, each with its own mechanics and enemy behaviors."
+             data-es="SlotVerse es un juego desarrollado para una Game Jam, donde cada partida ofrece una experiencia única. Los jugadores giran una tragaperras para combinar aleatoriamente un modo de juego, tipo de enemigo y escenario, generando un escenario diferente cada vez. El resultado puede ser desde un shooter top-down caótico hasta un desafío de carreras 2.5D a alta velocidad, cada uno con sus propias mecánicas y comportamientos de enemigos.">
+            SlotVerse is a game developed for a Game Jam, where each match offers a unique experience. Players spin a slot machine to randomly combine a game mode, enemy type, and setting, generating a different game scenario every time. The result can be anything from a chaotic top-down shooter to a high-speed 2.5D racing challenge, each with its own mechanics and enemy behaviors.
+          </p>
+          <div class="proj-meta">
+            <span class="meta-k" data-en="My Role" data-es="Mi rol">My Role</span>
+            <span class="meta-v" data-en="3D modeler and UI designer/programmer — created in-game assets and designed the interface logic, ensuring clarity and consistency across randomly generated game modes." data-es="Modelador 3D y diseñador/programador de UI — creé assets del juego y diseñé la lógica de la interfaz, asegurando claridad y consistencia en los modos de juego generados aleatoriamente.">3D modeler and UI designer/programmer — created in-game assets and designed the interface logic, ensuring clarity and consistency across randomly generated game modes.</span>
+            <span class="meta-k" data-en="Software" data-es="Software">Software</span>
+            <span class="meta-v">Unity 3D | 2D · Photoshop · Autodesk Maya · Substance Painter</span>
+          </div>
 
-    <!-- Bootstrap JavaScript -->
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-                $(document).ready(function(){
-            // Inicializar los carruseles
-            $('#carrusel').carousel({
-                interval: false
-            });
-            
-            $('#videojuegoCarrusel').carousel({
-                interval: false
-            });
+          <div class="proj-gallery" style="margin-bottom:1.5rem;">
+            <div class="proj-img-wrap" onclick="openLightbox('images/SLOTVERSE.jpg')" style="grid-column:span 2;">
+              <img src="images/SLOTVERSE.jpg" alt="SlotVerse">
+            </div>
+            <div class="proj-img-wrap" onclick="openLightbox('images/slotverse.png')">
+              <img src="images/slotverse.png" alt="SlotVerse logo">
+            </div>
+          </div>
 
-            $('#composer-vfx-carousel').carousel({
-                interval: false,
-                interval: 3000  // 8 segundos entre slides
-            });
-            
-            // También podemos hacer la transición más lenta
-            $('.carousel').carousel({
-                transition: '3s'  // La transición durará 3 segundos
-            });
-            
-            // Event listeners para los botones de navegación
-            $('.carousel-control-prev').click(function() {
-                $(this).closest('.carousel').carousel('prev');
-            });
-            
-            $('.carousel-control-next').click(function() {
-                $(this).closest('.carousel').carousel('next');
-            });
-        });
-    </script>
+          <div class="proj-actions">
+            <a href="https://miguelrico2031.itch.io/slotverse" target="_blank" class="btn btn-primary"
+               data-en="Play on itch.io" data-es="Jugar en itch.io">Play on itch.io</a>
+            <a href="https://miguelrico2031.itch.io/slotverse" target="_blank" class="btn btn-ghost"
+               data-en="Download SlotVerse" data-es="Descargar SlotVerse">Download SlotVerse</a>
+          </div>
+        </div>
+      </div>
+    </div>
 
+    <!-- itch.io CTA — BOTTOM -->
+    <div class="work3d-cta reveal" style="margin-top:3rem;">
+      <p data-en="Find all my games and demos on itch.io."
+         data-es="Encuentra todos mis juegos y demos en itch.io.">
+        Find all my games and demos on itch.io.
+      </p>
+      <a href="https://carmonaa-al.itch.io" target="_blank" class="btn btn-primary"
+         data-en="Visit my itch.io" data-es="Ver mi itch.io">Visit my itch.io</a>
+    </div>
 
-    <script src="slideshow-script.js"></script>
+  </div>
+</section>
+
+<!-- ================================================================
+     [ 06 ] VFX & COMPOSITING
+================================================================ -->
+<section id="vfx" class="section">
+  <span class="sec-num">06</span>
+  <div class="deco-cross"></div>
+  <div class="section-inner">
+    <p class="section-label reveal">
+      <span class="chapter-num">06</span>
+      <span data-en="Visual Effects" data-es="Efectos Visuales">Visual Effects</span>
+    </p>
+    <h2 class="section-title reveal" data-en="VFX &amp;<br>Compositing" data-es="VFX &amp;<br>Composición">VFX &amp;<br>Compositing</h2>
+    <div class="section-rule reveal"></div>
+
+    <div class="acc-card reveal" id="acc-vfx">
+      <div class="acc-head" onclick="toggleAcc('acc-vfx')">
+        <div class="acc-head-left">
+          <span class="acc-tag">Nuke · After Effects · Maya · Blender</span>
+          <h3 class="acc-title">VFX Compositing Work</h3>
+        </div>
+        <div class="acc-icon">+</div>
+      </div>
+      <div class="acc-body">
+        <div class="acc-inner">
+          <p class="proj-desc"
+             data-en="Experience in visual effects and compositing using professional tools like Nuke and After Effects. My work focuses on seamless integrations and visual effects that enhance the narrative of each project — combining 3D renders with live footage, color grading, and dynamic transitions."
+             data-es="Experiencia en efectos visuales y composición con Nuke y After Effects. Mi trabajo se centra en integraciones perfectas que potencian la narrativa — combinando renders 3D con imagen real, corrección de color y transiciones dinámicas.">
+            Experience in visual effects and compositing using professional tools like Nuke and After Effects. My work focuses on seamless integrations and visual effects that enhance the narrative of each project — combining 3D renders with live footage, color grading, and dynamic transitions.
+          </p>
+          <div class="proj-meta" style="margin-bottom:1.5rem;">
+            <span class="meta-k" data-en="Duties" data-es="Tareas">Duties</span>
+            <span class="meta-v" data-en="VFX · Color grading · Compositing · 3D integration · Transitions" data-es="VFX · Corrección de color · Composición · Integración 3D · Transiciones">VFX · Color grading · Compositing · 3D integration · Transitions</span>
+            <span class="meta-k" data-en="Software" data-es="Software">Software</span>
+            <span class="meta-v">Nuke · After Effects · Premiere Pro · Maya · Blender</span>
+          </div>
+
+          <!-- 3 compositing videos -->
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:3px;margin-bottom:1.5rem;">
+            <div>
+              <p class="demo-label" data-en="Composition 01" data-es="Composición 01">Composition 01</p>
+              <div class="video-wrap" onclick="playVideo(this)">
+                <video preload="metadata"><source src="images/compo2.mp4" type="video/mp4"></video>
+                <div class="vid-thumb">
+                  <div class="play-ring"></div>
+                  <span class="vid-label" data-en="VFX Comp 01" data-es="Comp VFX 01">VFX Comp 01</span>
+                </div>
+              </div>
+            </div>
+            <div>
+              <p class="demo-label" data-en="Composition 02" data-es="Composición 02">Composition 02</p>
+              <div class="video-wrap" onclick="playVideo(this)">
+                <video preload="metadata"><source src="images/compo3.mp4" type="video/mp4"></video>
+                <div class="vid-thumb">
+                  <div class="play-ring"></div>
+                  <span class="vid-label" data-en="VFX Comp 02" data-es="Comp VFX 02">VFX Comp 02</span>
+                </div>
+              </div>
+            </div>
+            <div style="grid-column:span 2;">
+              <p class="demo-label" data-en="Composition 03" data-es="Composición 03">Composition 03</p>
+              <div class="video-wrap" onclick="playVideo(this)">
+                <video preload="metadata"><source src="images/compo.mp4" type="video/mp4"></video>
+                <div class="vid-thumb">
+                  <div class="play-ring"></div>
+                  <span class="vid-label" data-en="VFX Comp 03" data-es="Comp VFX 03">VFX Comp 03</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ TICKER 04 ════════════════════════════════════════════ -->
+<div class="ticker ticker--wine">
+  <div class="ticker-track ticker-track--rev">
+    <span class="ticker-item">2021 – 2023 GAME DESIGN</span><span class="ticker-item ticker-sep">·</span>
+    <span class="ticker-item">2023 – 2025 HIGHER DEGREE 3D</span><span class="ticker-item ticker-sep">·</span>
+    <span class="ticker-item">2025 DENIAL</span><span class="ticker-item ticker-sep">·</span>
+    <span class="ticker-item">ADRIÁN CARMONA CÓRDOBA</span><span class="ticker-item ticker-sep">·</span>
+    <span class="ticker-item">2021 – 2023 GAME DESIGN</span><span class="ticker-item ticker-sep">·</span>
+    <span class="ticker-item">2023 – 2025 HIGHER DEGREE 3D</span><span class="ticker-item ticker-sep">·</span>
+    <span class="ticker-item">2025 DENIAL</span><span class="ticker-item ticker-sep">·</span>
+    <span class="ticker-item">ADRIÁN CARMONA CÓRDOBA</span><span class="ticker-item ticker-sep">·</span>
+  </div>
+</div>
+
+<!-- ================================================================
+     [ 07 ] TIMELINE
+================================================================ -->
+<section id="timeline" class="section">
+  <span class="sec-num">07</span>
+  <div class="section-inner">
+    <p class="section-label reveal">
+      <span class="chapter-num">07</span>
+      <span data-en="My story" data-es="Mi historia">My story</span>
+    </p>
+    <h2 class="section-title reveal" data-en="Journey" data-es="Trayectoria">Journey</h2>
+    <div class="section-rule reveal"></div>
+
+    <div class="timeline-track">
+
+      <div class="tl-item reveal">
+        <div class="tl-dot"></div>
+        <p class="tl-date">2021 – 2023</p>
+        <p class="tl-head" data-en="University — Game Design &amp; Development" data-es="Universidad — Diseño y Desarrollo de Videojuegos">University — Game Design &amp; Development</p>
+        <p class="tl-body"
+           data-en="Degree in Game Design and Development — programming, level design, game mechanics, prototyping and project management. First contact with 3D tools and the full production pipeline."
+           data-es="Carrera universitaria en Diseño y Desarrollo de Videojuegos — programación, diseño de niveles, mecánicas de juego, prototipado y gestión de proyectos. Primer contacto con herramientas 3D y el pipeline completo.">
+          Degree in Game Design and Development — programming, level design, game mechanics, prototyping and project management. First contact with 3D tools and the full production pipeline.
+        </p>
+      </div>
+
+      <div class="tl-item reveal">
+        <div class="tl-dot"></div>
+        <p class="tl-date">2023 – 2025</p>
+        <p class="tl-head" data-en="Higher Degree — 3D Animation, Games &amp; Interactive Environments" data-es="Grado Superior — Animaciones 3D, Juegos y Entornos Interactivos">Higher Degree — 3D Animation, Games &amp; Interactive Environments</p>
+        <p class="tl-body"
+           data-en="Full pipeline training: modeling, sculpting, UV mapping, texturing, rigging, animation, VFX compositing and game development. Projects: Denial, Ghoul Geyser, multiple 3D studies and VFX compositions."
+           data-es="Formación completa del pipeline: modelado, escultura, UV mapping, texturizado, rigging, animación, composición VFX y videojuegos. Proyectos: Denial, Ghoul Geyser, múltiples estudios 3D y composiciones VFX.">
+          Full pipeline training: modeling, sculpting, UV mapping, texturing, rigging, animation, VFX compositing and game development. Projects: Denial, Ghoul Geyser, multiple 3D studies and VFX compositions.
+        </p>
+      </div>
+
+      <div class="tl-item reveal">
+        <div class="tl-dot"></div>
+        <p class="tl-date">2024</p>
+        <p class="tl-head" data-en="First Professional DemoReel" data-es="Primer DemoReel Profesional">First Professional DemoReel</p>
+        <p class="tl-body"
+           data-en="Released my first professional demo reel — showcasing 3D generalist work, VFX compositing and game development across multiple projects."
+           data-es="Publicación de mi primer demo reel profesional — mostrando trabajo de generalista 3D, composición VFX y desarrollo de videojuegos en múltiples proyectos.">
+          Released my first professional demo reel — showcasing 3D generalist work, VFX compositing and game development across multiple projects.
+        </p>
+      </div>
+
+      <div class="tl-item reveal">
+        <div class="tl-dot"></div>
+        <p class="tl-date">2025</p>
+        <p class="tl-head" data-en="Denial — Released on itch.io" data-es="Denial — Lanzamiento en itch.io">Denial — Released on itch.io</p>
+        <p class="tl-body"
+           data-en="Shipped a full psychological horror game with a team of 9. Served as sole programmer, director and technical lead — Unity 3D (URP), C#."
+           data-es="Lanzamiento de un juego de terror psicológico completo con un equipo de 9 personas. Ejercí como único programador, director y responsable técnico — Unity 3D (URP), C#.">
+          Shipped a full psychological horror game with a team of 9. Served as sole programmer, director and technical lead — Unity 3D (URP), C#.
+        </p>
+      </div>
+
+      <div class="tl-item reveal">
+        <div class="tl-dot"></div>
+        <p class="tl-date">2025 – 2026</p>
+        <p class="tl-head"
+           data-en="Expanding — Sharpening Focus on 3D Art"
+           data-es="Ampliando — Mayor Enfoque en Arte 3D">Expanding — Sharpening Focus on 3D Art</p>
+        <p class="tl-body"
+           data-en="Broadening knowledge across game development and 3D artistry — with an increasingly strong focus on the latter: character sculpting, environment art, rendering and product visualization."
+           data-es="Ampliando conocimientos en desarrollo de videojuegos y arte 3D — con un enfoque cada vez mayor en esta segunda faceta: escultura de personajes, arte de entornos, renderizado y visualización de producto.">
+          Broadening knowledge across game development and 3D artistry — with an increasingly strong focus on the latter: character sculpting, environment art, rendering and product visualization.
+        </p>
+      </div>
+
+      <div class="tl-item reveal">
+        <div class="tl-dot tl-dot--now"></div>
+        <p class="tl-date tl-date--now">2026 · Now</p>
+        <p class="tl-head"
+           data-en="Blender — Full 3D Generalist Pipeline"
+           data-es="Blender — Pipeline Completo de Artista 3D">Blender — Full 3D Generalist Pipeline</p>
+        <p class="tl-body"
+           data-en="Consolidating knowledge in Blender as the core tool — mastering the full workflow of a 3D generalist artist: modeling, sculpting, shading, lighting, rendering and compositing. Seeking my first professional role in a creative, ambitious studio."
+           data-es="Afianzando conocimientos en Blender como herramienta principal — dominando el flujo de trabajo completo de un artista 3D generalista: modelado, escultura, shading, iluminación, renderizado y composición. En busca de mi primera oportunidad profesional en un estudio creativo y ambicioso.">
+          Consolidating knowledge in Blender as the core tool — mastering the full workflow of a 3D generalist artist: modeling, sculpting, shading, lighting, rendering and compositing. Seeking my first professional role in a creative, ambitious studio.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
+     [ 08 ] CV
+================================================================ -->
+<section id="cv" class="section">
+  <span class="sec-num">08</span>
+  <div class="section-inner">
+    <div class="cv-frame reveal">
+      <p class="section-label" style="justify-content:center;margin-bottom:1.5rem;">
+        <span class="chapter-num">08</span>
+        <span data-en="Download" data-es="Descargar">Download</span>
+      </p>
+      <h2 class="section-title" style="text-align:center;font-size:clamp(3rem,6vw,5rem);"
+          data-en="My CV" data-es="Mi CV">My CV</h2>
+      <p data-en="Download the full curriculum vitae to learn more about my education, skills, projects and experience."
+         data-es="Descarga el currículum completo para conocer mi formación, habilidades, proyectos y experiencia.">
+        Download the full curriculum vitae to learn more about my education, skills, projects and experience.
+      </p>
+      <a href="docs/CV Adrián Carmona Córdoba_Inglés.pdf" target="_blank" class="btn btn-primary"
+         data-en="View / Download CV" data-es="Ver / Descargar CV">View / Download CV</a>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
+     [ 09 ] CONTACT
+================================================================ -->
+<section id="contact" class="section">
+  <span class="sec-num">09</span>
+  <div class="deco-ring"></div>
+  <div class="section-inner">
+    <p class="section-label reveal">
+      <span class="chapter-num">09</span>
+      <span data-en="Get in touch" data-es="Contáctame">Get in touch</span>
+    </p>
+    <h2 class="section-title reveal" data-en="Contact" data-es="Contacto">Contact</h2>
+    <div class="section-rule reveal"></div>
+
+    <div class="contact-grid">
+      <div class="contact-info reveal-l">
+        <p data-en="Interested in working together or just want to say hello? Reach me via any of the channels below, or send a message directly."
+           data-es="¿Interesado en colaborar o simplemente quieres saludar? Contáctame por cualquiera de los canales o envía un mensaje directamente.">
+          Interested in working together or just want to say hello? Reach me via any of the channels below, or send a message directly.
+        </p>
+        <div class="c-links">
+          <a href="mailto:adriancarmonacordoba@gmail.com" class="c-link">
+            <span class="c-link-icon">✉</span> adriancarmonacordoba@gmail.com
+          </a>
+          <a href="https://www.linkedin.com/in/adrián-carmona-córdoba/" target="_blank" class="c-link">
+            <span class="c-link-icon">in</span> LinkedIn
+          </a>
+          <a href="https://www.artstation.com/carmona17" target="_blank" class="c-link">
+            <span class="c-link-icon">◈</span> ArtStation
+          </a>
+          <a href="https://carmonaa-al.itch.io" target="_blank" class="c-link">
+            <span class="c-link-icon">▸</span> itch.io
+          </a>
+        </div>
+      </div>
+
+      <div class="reveal-r">
+        <form class="contact-form" onsubmit="submitForm(event)">
+          <div class="form-group">
+            <label data-en="Your name"  data-es="Tu nombre">Your name</label>
+            <input type="text" id="fName"
+                   data-placeholder-en="John Doe" data-placeholder-es="Tu nombre"
+                   placeholder="John Doe" required>
+          </div>
+          <div class="form-group">
+            <label data-en="Your email" data-es="Tu email">Your email</label>
+            <input type="email" id="fEmail"
+                   data-placeholder-en="you@email.com" data-placeholder-es="tu@email.com"
+                   placeholder="you@email.com" required>
+          </div>
+          <div class="form-group">
+            <label data-en="Message" data-es="Mensaje">Message</label>
+            <textarea id="fMsg" rows="5"
+                      data-placeholder-en="Tell me about your project…"
+                      data-placeholder-es="Cuéntame sobre tu proyecto…"
+                      placeholder="Tell me about your project…" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary"
+                  data-en="Send message" data-es="Enviar mensaje">Send message</button>
+          <p id="fStatus"></p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
+     FOOTER
+================================================================ -->
+<footer>
+  <span class="footer-name">ADRIÁN CARMONA CÓRDOBA</span>
+  <span class="footer-copy"
+        data-en="© 2026 · 3D Artist · VFX · Game Dev"
+        data-es="© 2026 · Artista 3D · VFX · Game Dev">
+    © 2026 · 3D Artist · VFX · Game Dev
+  </span>
+</footer>
+
+<script src="main.js"></script>
 </body>
 </html>
